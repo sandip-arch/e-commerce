@@ -1,12 +1,11 @@
-
+const { keccak256 } = require('js-sha3');
 const User = require('../models/userModel');
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 
 const authRegister = async (req, res) => {
   const { userName, email, phone, password, address, nearestLandmark, gender, pinCode } = req.body;
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await keccak256(password, 10);
   const newUser = new User({
     userName,
     email,
